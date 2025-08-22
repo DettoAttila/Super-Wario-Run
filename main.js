@@ -636,6 +636,10 @@ function update(time){
     //drawSATBox(ctx, testbox, 'red');
     
     const tileCollisions = collisionFG();
+
+    //lascia qui
+    player.collision_box.pos.x = player.x + 10; //+5
+    player.collision_box.pos.y = player.y + 9;
     
     player.on_ground = checkOnGround(tileCollisions);
     risolviCollisione(tileCollisions);
@@ -687,9 +691,6 @@ function update(time){
         audio.audio_scream.play();
         return;
     }
-
-    player.collision_box.pos.x = player.x + 5;
-    player.collision_box.pos.y = player.y + 9; //+2
 
     requestAnimationFrame(update);
 }

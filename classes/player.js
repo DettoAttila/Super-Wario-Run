@@ -20,7 +20,7 @@ export const player = {
     punteggio: 0
 }
 
-player.collision_box = new SAT.Box(new SAT.Vector(player.x, player.y), player.width - 10, player.height - 8);
+player.collision_box = new SAT.Box(new SAT.Vector(player.x, player.y), player.width/2, player.height - 8);
 
 export function jump(){
     player.salto = -8;

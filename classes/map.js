@@ -22,8 +22,8 @@ export const collision_data = { ///"NORMALIZZARLE" TUTTE
     21: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
     22: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
     24: [{ type: "poly", x: 0, y: 0, points: [[0,16], [16,0], [16,16]] }],
-    25: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
-    26: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
+    //25: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
+    //26: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
     27: [{ type: "poly", x: 0, y: 0, points: [[0,0], [0,16], [16,16]] }],
     28: [{ type: "gem", x: 4, y: 0, width: 8, height: 16 }],
     29: [{ type: "gem", x: 4, y: 0, width: 8, height: 16 }],
@@ -77,7 +77,6 @@ export const collision_data = { ///"NORMALIZZARLE" TUTTE
     103: [{ type: "poly", x: 0, y: 0, points: [[0,16], [16,16], [16,8]] }],
     104: [{ type: "poly", x: 0, y: 0, points: [[0,16], [16,16], [16,0], [0,8]] }],
     105: [{ type: "poly", x: 0, y: 0, points: [[0,0], [0,16], [16,16], [16,8]] }],
-    //106: [{ type: "poly", x: 0, y: 8, points: [[0,0], [16,8], [0,8]] }],
     106: [{ type: "poly", x: 0, y: 0, points: [[0,16], [16,16], [0,8]] }],
     109: [{ type: "lava", x: 0, y: 5, width: 16, height: 11 }],
     110: [{ type: "lava", x: 0, y: 5, width: 16, height: 11 }],
@@ -86,7 +85,11 @@ export const collision_data = { ///"NORMALIZZARLE" TUTTE
     121: [{ type: "poly", x: 0, y: 0, points: [[0,0], [16,0], [16,8], [0,16]] }],
     122: [{ type: "poly", x: 0, y: 0, points: [[0,0], [16,0], [0,8]] }],
     125: [{ type: "lava", x: 0, y: 5, width: 16, height: 11 }],
-    126: [{ type: "lava", x: 0, y: 5, width: 16, height: 11 }]
+    126: [{ type: "lava", x: 0, y: 5, width: 16, height: 11 }],
+    134: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
+    136: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
+    150: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }],
+    152: [{ type: "rect", x: 0, y: 0, width: 16, height: 16 }]
 }
 
 let sezione1 = new Sezione([
