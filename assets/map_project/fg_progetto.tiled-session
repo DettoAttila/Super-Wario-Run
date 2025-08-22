@@ -1,0 +1,96 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map_3.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "Tutti i file (*)",
+    "fileStates": {
+        "fg_tileset.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 3
+        },
+        "gems.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 3
+        },
+        "map_0.tmx": {
+            "scale": 2.92,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 148.28767123287673,
+                "y": 82.0205479452055
+            }
+        },
+        "map_1.js": {
+            "scale": 3.01,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 226.24584717607974,
+                "y": 78.23920265780731
+            }
+        },
+        "map_1.tmx": {
+            "scale": 3.0103125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.17440049828716,
+                "y": 80.22422921208347
+            }
+        },
+        "map_2.tmx": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 194,
+                "y": 68.16666666666669
+            }
+        },
+        "map_3.tmx": {
+            "scale": 4.104971590909091,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 205.11713208069483,
+                "y": 72.47309595487731
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/Utente1/Desktop/Materiale Univesitario/Progettazione Web/Progetto/assets/map_project",
+    "last.externalTilesetPath": "C:/Users/Utente1/Desktop/Materiale Univesitario/Progettazione Web/Progetto/assets/map_project",
+    "last.imagePath": "C:/Users/Utente1/Desktop/Materiale Univesitario/Progettazione Web/Progetto/assets",
+    "lastUsedTilesetExportFilter": "Tutti i file (*)",
+    "map.fixedSize": true,
+    "map.height": 10,
+    "map.lastUsedExportFilter": "File mappa JavaScript (*.js)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 22,
+    "openFiles": [
+        "map_0.tmx",
+        "fg_tileset.tsx",
+        "map_2.tmx",
+        "map_1.js",
+        "gems.tsx",
+        "map_3.tmx"
+    ],
+    "project": "fg_progetto.tiled-project",
+    "recentFiles": [
+        "map_0.tmx",
+        "fg_tileset.tsx",
+        "map_2.tmx",
+        "map_1.js",
+        "gems.tsx",
+        "map_3.tmx",
+        "map_1.tmx"
+    ],
+    "tileset.lastUsedFilter": "File Tileset Tiled (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

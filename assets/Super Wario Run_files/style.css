@@ -1,0 +1,26 @@
+.titolo {
+  display: block;
+  text-align: center;
+}
+
+body {
+  background: #858585;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+canvas {
+  background: fuchsia;
+  border: 2px solid #333;
+  image-rendering: pixelated;
+  width: 960px;
+  height: 640px;
+}
