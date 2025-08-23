@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_3.tmx",
+    "activeFile": "map_1.js",
     "expandedProjectPaths": [
         "."
     ],
@@ -21,16 +21,16 @@
             "scale": 2.92,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 148.28767123287673,
-                "y": 82.0205479452055
+                "x": 134.76027397260273,
+                "y": 79.96575342465754
             }
         },
         "map_1.js": {
             "scale": 3.01,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 226.24584717607974,
-                "y": 78.23920265780731
+                "x": 239.20265780730898,
+                "y": 79.90033222591364
             }
         },
         "map_1.tmx": {
@@ -41,20 +41,36 @@
                 "y": 80.22422921208347
             }
         },
+        "map_2.js": {
+            "scale": 4.515468749999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 122.91082736426868,
+                "y": 80.05813349942908
+            }
+        },
         "map_2.tmx": {
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 194,
-                "y": 68.16666666666669
+                "x": 159.83333333333334,
+                "y": 80.16666666666669
+            }
+        },
+        "map_3.js": {
+            "scale": 4.104971590909091,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 256.03100453302875,
+                "y": 80.02491435689815
             }
         },
         "map_3.tmx": {
             "scale": 4.104971590909091,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 205.11713208069483,
-                "y": 72.47309595487731
+                "x": 395.130627357348,
+                "y": 54.446174608117914
             }
         }
     },
@@ -70,20 +86,19 @@
     "map.tileWidth": 16,
     "map.width": 22,
     "openFiles": [
-        "map_0.tmx",
         "fg_tileset.tsx",
-        "map_2.tmx",
-        "map_1.js",
         "gems.tsx",
-        "map_3.tmx"
+        "map_1.js"
     ],
     "project": "fg_progetto.tiled-project",
     "recentFiles": [
-        "map_0.tmx",
         "fg_tileset.tsx",
-        "map_2.tmx",
-        "map_1.js",
         "gems.tsx",
+        "map_1.js",
+        "map_3.js",
+        "map_2.js",
+        "map_0.tmx",
+        "map_2.tmx",
         "map_3.tmx",
         "map_1.tmx"
     ],
