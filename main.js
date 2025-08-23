@@ -528,7 +528,7 @@ function risolviCollisione(tileCollisions){ //per riposizionare il personaggio
             }
 
             if(response.overlapV.y < 0){ //il player colpisce il soffitto con la testa
-                player.y -= response.overlapV.y + 1;
+                player.y -= response.overlapV.y - 1;
                 player.salto = Math.abs(player.salto) * 0.2;
             }
 
