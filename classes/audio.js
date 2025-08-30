@@ -18,3 +18,5 @@ export const audio_jump = new Audio('./../assets/sfx/Wario_Jump.wav');
 export const audio_dash = new Audio('./../assets/sfx/Wario_Attack.wav');
 export const audio_block_destroy = new Audio('./../assets/sfx/Wario_AttackBlock.wav');
 export const audio_yeah = new Audio('./../assets/sfx/Yeah01.wav');
+export const audio_alright = new Audio('./../assets/sfx/Alright01.wav');
+export const audio_diamond = new Audio('./../assets/sfx/Diamond.wav');

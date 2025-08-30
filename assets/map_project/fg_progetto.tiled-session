@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_1.js",
+    "activeFile": "map_4.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -29,8 +29,8 @@
             "scale": 3.01,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.20265780730898,
-                "y": 79.90033222591364
+                "x": 254.31893687707645,
+                "y": 80.23255813953489
             }
         },
         "map_1.tmx": {
@@ -72,6 +72,22 @@
                 "x": 395.130627357348,
                 "y": 54.446174608117914
             }
+        },
+        "map_4.tmx": {
+            "scale": 4.797499999999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 113.6008337675873,
+                "y": 83.27253778009381
+            }
+        },
+        "map_5.tmx": {
+            "scale": 4.104971590909091,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 189.0390670957472,
+                "y": 81.24294958303054
+            }
         }
     },
     "last.exportedFilePath": "C:/Users/Utente1/Desktop/Materiale Univesitario/Progettazione Web/Progetto/assets/map_project",
@@ -88,13 +104,17 @@
     "openFiles": [
         "fg_tileset.tsx",
         "gems.tsx",
-        "map_1.js"
+        "map_1.js",
+        "map_4.tmx",
+        "map_5.tmx"
     ],
     "project": "fg_progetto.tiled-project",
     "recentFiles": [
         "fg_tileset.tsx",
         "gems.tsx",
         "map_1.js",
+        "map_5.tmx",
+        "map_4.tmx",
         "map_3.js",
         "map_2.js",
         "map_0.tmx",
