@@ -3,19 +3,27 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_4.tmx",
+    "activeFile": "map_13.js",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "Tutti i file (*)",
     "fileStates": {
         "fg_tileset.tsx": {
-            "scaleInDock": 2,
+            "scaleInDock": 3,
             "scaleInEditor": 3
         },
         "gems.tsx": {
             "scaleInDock": 2,
             "scaleInEditor": 3
+        },
+        "map_0.js": {
+            "scale": 5.67625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 119.79740145342437,
+                "y": 80.0704690596785
+            }
         },
         "map_0.tmx": {
             "scale": 2.92,
@@ -29,8 +37,8 @@
             "scale": 3.01,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 254.31893687707645,
-                "y": 80.23255813953489
+                "x": 253.15614617940201,
+                "y": 134.38538205980066
             }
         },
         "map_1.tmx": {
@@ -39,6 +47,38 @@
             "viewCenter": {
                 "x": 240.17440049828716,
                 "y": 80.22422921208347
+            }
+        },
+        "map_10.js": {
+            "scale": 4.690625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 150.93937375083277,
+                "y": 69.8201199200533
+            }
+        },
+        "map_11.js": {
+            "scale": 4.690625,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 149.44703530979348,
+                "y": 79.62691538974016
+            }
+        },
+        "map_12.js": {
+            "scale": 4,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 463.25,
+                "y": 109.375
+            }
+        },
+        "map_13.js": {
+            "scale": 4,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 103.5,
+                "y": 107.875
             }
         },
         "map_2.js": {
@@ -75,18 +115,50 @@
         },
         "map_4.tmx": {
             "scale": 4.797499999999999,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 113.6008337675873,
-                "y": 83.27253778009381
+                "x": 118.3949973944763,
+                "y": 91.81865554976552
             }
         },
         "map_5.tmx": {
             "scale": 4.104971590909091,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 174.66625142738502,
+                "y": 79.29409322121872
+            }
+        },
+        "map_6.tmx": {
+            "scale": 4.104971590909091,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 189.0390670957472,
-                "y": 81.24294958303054
+                "x": 175.8842866535174,
+                "y": 98.05183570365755
+            }
+        },
+        "map_7.js": {
+            "scale": 4.104971590909091,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 174.9098584726115,
+                "y": 61.267171874459315
+            }
+        },
+        "map_8.js": {
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 237.33333333333331,
+                "y": 85.16666666666666
+            }
+        },
+        "map_9.js": {
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 272.3333333333333,
+                "y": 134.5
             }
         }
     },
@@ -97,30 +169,32 @@
     "map.fixedSize": true,
     "map.height": 10,
     "map.lastUsedExportFilter": "File mappa JavaScript (*.js)",
-    "map.lastUsedFormat": "tmx",
+    "map.lastUsedFormat": "js",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 22,
+    "map.width": 36,
     "openFiles": [
         "fg_tileset.tsx",
         "gems.tsx",
-        "map_1.js",
-        "map_4.tmx",
-        "map_5.tmx"
+        "map_13.js",
+        "map_10.js",
+        "map_11.js",
+        "map_12.js"
     ],
     "project": "fg_progetto.tiled-project",
     "recentFiles": [
         "fg_tileset.tsx",
         "gems.tsx",
-        "map_1.js",
-        "map_5.tmx",
+        "map_12.js",
+        "map_11.js",
+        "map_10.js",
+        "map_13.js",
+        "map_9.js",
+        "map_8.js",
         "map_4.tmx",
-        "map_3.js",
-        "map_2.js",
-        "map_0.tmx",
-        "map_2.tmx",
-        "map_3.tmx",
-        "map_1.tmx"
+        "map_5.tmx",
+        "map_7.js",
+        "map_0.js"
     ],
     "tileset.lastUsedFilter": "File Tileset Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

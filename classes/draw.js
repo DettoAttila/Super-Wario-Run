@@ -1,4 +1,5 @@
 import { camera_x, canvas, ctx, tile_col, tile_size } from '../main.js';
+import { creaCollisioni } from './collision.js';
 import { buffer_sezioni, col_offset_global } from './map.js';
 import { player } from './player.js';
 
@@ -91,7 +92,7 @@ export function drawSATBox(ctx, box, color){
 }
 
 export function drawTileCollisionDebug() {
-    const tileCollisions = collisionFG();
+    const tileCollisions = creaCollisioni();
 
     ctx.save();
     ctx.strokeStyle = "yellow";
@@ -224,7 +225,7 @@ export function drawParticelle(){
     }
 }
 
-export function drawStage(){
+export function drawStage(lvl = 1){
     const HFLIP_FLAG = 0x80000000;
     const VFLIP_FLAG = 0x40000000;
 
@@ -237,19 +238,27 @@ export function drawStage(){
     //const diamonds_tile = [139, 140, 154, 155, 156]; //a eccezione del 138, gli altri non vanno disegnati
 
     //animazione gemme
-    frame_counter++;
-    if(frame_counter >= 7) { //delay
-        frame_counter = 0;
-        frame_gem = (frame_gem + 1) % 4; //4 sono i frame totali delle gemme
-        frame_lava = (frame_lava + 1) % 6;
-        frame_diamond = (frame_diamond + 1) % 16;
+    if(lvl != 0){
+        frame_counter++;
+        if(frame_counter >= 7) { //delay
+            frame_counter = 0;
+            frame_gem = (frame_gem + 1) % 4; //4 sono i frame totali delle gemme
+            frame_lava = (frame_lava + 1) % 6;
+            frame_diamond = (frame_diamond + 1) % 16;
+        }
     }
 
     let col_offset = col_offset_global;
 
     for(let sezione of buffer_sezioni){
         const {fg_tilemap, map_col, map_row} = sezione;
+        let index_livello = 0;
         for(let livello of sezione.fg_tilemap){
+            if(lvl == 1 && index_livello == 0) {
+                index_livello++;
+                continue;
+            }
+
             for (let i = inizio_row_visibile; i < fine_row_visibile; i++) {
                 if (i >= map_row) continue;
 
@@ -315,8 +324,12 @@ export function drawStage(){
                     ctx.restore();
                 }
             }
+            if(lvl == 0) break;
+
+            index_livello++;
         }
         col_offset += map_col;
+
     }
 }
 

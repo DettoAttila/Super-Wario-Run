@@ -12,7 +12,16 @@ canvas.width = 240;
 canvas.height = 160;
 
 //Quadro iniziale
-export let fg_tilemap = [[1073742004, 1073741987, 1073741988, 1073741971, 1073742003, 1073742004, 1073741987, 1073741988, 1073741971, 1073742003, 1073742004, 1073741987, 1073741988, 1073741971, 1073742003,
+export let fg_tilemap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 226, 227, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 226, 227, 242, 243, 0, 0, 226, 227, 0, 0, 0,
+            0, 0, 226, 227, 242, 243, 258, 259, 0, 0, 242, 243, 0, 0, 0,
+            226, 227, 242, 243, 258, 259, 274, 275, 226, 227, 258, 259, 274, 308, 0,
+            242, 246, 258, 259, 274, 275, 226, 227, 242, 243, 274, 275, 244, 0, 0,
+            258, 262, 274, 275, 226, 227, 242, 243, 258, 259, 226, 214, 0, 0, 0,
+            274, 275, 226, 227, 242, 243, 258, 259, 290, 291, 242, 244, 0, 0, 0,
+            0, 0, 0, 0, 258, 259, 0, 0, 0, 0, 258, 259, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 274, 275, 0, 0, 0],[1073742004, 1073741987, 1073741988, 1073741971, 1073742003, 1073742004, 1073741987, 1073741988, 1073741971, 1073742003, 1073742004, 1073741987, 1073741988, 1073741971, 1073742003,
             1073742003, 1073742004, 1073741987, 1073741988, 1073741971, 1073742003, 1073742004, 1073741987, 1073741988, 1073741971, 1073742003, 1073742004, 1073741987, 1073741988, 1073741971,
             1073741954, 1073741955, 1073741956, 1073741957, 1073741954, 1073741955, 1073741956, 1073741957, 1073741954, 1073741955, 1073741956, 1073741957, 1073741954, 1073741955, 1073741956,
             99, 100, 101, 102, 36, 99, 100, 101, 102, 36, 99, 100, 101, 102, 36,
@@ -21,12 +30,12 @@ export let fg_tilemap = [[1073742004, 1073741987, 1073741988, 1073741971, 107374
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5,
             19, 20, 21, 22, 19, 20, 21, 22, 19, 20, 21, 22, 19, 20, 21,
-            130, 131, 132, 133, 130, 131, 132, 133, 130, 131, 132, 133, 130, 131, 132],[]];
+            130, 131, 132, 133, 130, 131, 132, 133, 130, 131, 132, 133, 130, 131, 132]];
 
 export const tile_size = 16;
 export const tile_col = 16;
 
-let margine_caricamento = tile_size*20; //grullo
+let margine_caricamento = tile_size*5; //grullo
 
 export let map_col = 15;
 export let map_row = 10;
@@ -75,6 +84,7 @@ function update(time){
     }
 
     draw.drawBG();
+    draw.drawStage(0); //per disegnare eventuali elementi in "background"
     draw.drawPlayer();
     draw.drawStage();
     draw.drawParticelle();
@@ -102,13 +112,10 @@ function update(time){
     }
 
     if(player.stato == "dash" && player.x < 50){
-        player.x += player.rincorsa;
-        player.dash_timer = (player.dash_timer || 0) + 1;        
+        player.x += player.rincorsa;   
 
-        if(player.x >= 50 || player.dash_timer > 10){
+        if(player.x >= 50)
             player.stato = "dash_end";
-            player.dash_timer = 0;
-        }
     }
 
     //se finisce un po' troppo indietro dopo una collisione
@@ -138,6 +145,9 @@ function update(time){
     player.on_slope = checkOnSlope(tile_collisions);
     risolviCollisione(tile_collisions);
 
+    if(player.on_ground) //sostanzialmente: prima verifica se è in aria e gestisci, gestisci le collisioni e infine se è per terra setta salto a 0
+        player.salto = 0;
+
     timer += delta;
 
     if(timer >= 30000){
@@ -147,7 +157,6 @@ function update(time){
     }
     
     camera_x += camera_speed;
-    //camera_x = Math.round(camera_x); //per evitare lo screen tearing
         
     player.punteggio += Math.round(delta/33);
 
@@ -155,27 +164,21 @@ function update(time){
         audio.playAudio(audio.audio_yeah);
 
     if(camera_x > fine_sezione + margine_caricamento){ //margine per evitare che venga rimossa troppo prima
-        caricaSezione();
-        
-        //fine_sezione = map_col * tile_size;
-        fine_sezione += buffer_sezioni[buffer_sezioni.length - 1].map_col * tile_size;
-
         rimuoviSezione();
+        caricaSezione();
+        fine_sezione += buffer_sezioni[0].map_col * tile_size;
     }
-    
-    /*
-    drawSATBox(ctx, player.collision_box, 'cyan');
-    drawTileCollisionDebug();
-    */
     
     if(in_lava || player.y > canvas.height + tile_size || player.x < -player.width){ //GAME OVER
         ctx.drawImage(draw.gameover_img, 0, 0);
         stato_gioco = "game over";
 
+        const is_high_score = checkHighestScore();
+
         checkClassifica().then(in_classifica => {
-            if(in_classifica){
+            if(in_classifica || is_high_score){
                 audio.playAudio(audio.audio_alright);
-                salvaPunteggio();
+                salvaPunteggio(in_classifica, is_high_score);
             } else {
                 audio.audio_scream.play();
             }
@@ -201,7 +204,7 @@ function reset(){
     location.reload(); //ricarica la pagina, eventualmente creare uno script tale che resetti il buffer_sezioni e tutti gli altri valori prima di update()
 }
 
-async function salvaPunteggio(){
+async function salvaPunteggio(in_classifica, is_high_score){
     if(confirm("New High Score! Do you want to save it?")){
         let username = null;
         let valid = false;
@@ -217,34 +220,51 @@ async function salvaPunteggio(){
             username = (input && input.trim() != "") ? input.trim() : "???";
             valid = true;
         }
+
+        if(is_high_score){
+            localStorage.setItem("local_highest_score", player.punteggio);
+            localStorage.setItem("local_highest_gemme", player.gemme);
+            localStorage.setItem("local_name", username);
+        }
         
-        try {
-            const response = await fetch("save_score.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    username: username, 
-                    punteggio: player.punteggio, 
-                    gems: player.gemme
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        if(in_classifica){
+            try {
+                const response = await fetch("save_score.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        username: username, 
+                        punteggio: player.punteggio, 
+                        gems: player.gemme
+                    })
+                });
+                
+                if(!response.ok)
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                
+                const result = await response.json();
+                
+                if(!result.success){
+                    console.error("Error:", result.error);
+                    alert("Error saving score.");
+                }
+                
+            } catch (error) {
+                console.error("Error saving score:", error);
+                alert("Error saving score.");
             }
-            
-            const result = await response.json();
-            
-            if(!result.success){
-                alert("Error saving score: " + result.error);
-                console.error("Error:", result.error);
-            }
-            
-        } catch (error) {
-            console.error("Error saving score:", error);
-            alert("Error saving score. Please try again.");
         }
     }
+}
+
+function checkHighestScore() {
+    const local_highest_score = localStorage.getItem("local_highest_score") || 0;
+    const local_highest_gemme = localStorage.getItem("local_highest_gemme") || 0;
+
+    if(player.punteggio > local_highest_score || (player.punteggio == local_highest_score && player.gemme > local_highest_gemme))
+        return true;
+
+    return false;
 }
 
 async function checkClassifica() {
@@ -308,11 +328,6 @@ async function mostraScoreboard() {
     
     const classifica = await getScoreboard();
     
-    if (classifica.length === 0) {
-        container.innerHTML = '<div class="no-data">No data available.</div>';
-        return;
-    }
-    
     // Crea la tabella HTML
     let tableHTML = `
         <img src="assets/monitor1.png" id="monitor1">
@@ -324,7 +339,7 @@ async function mostraScoreboard() {
                         <th id="thrank">Rank</th>
                         <th id="thname">Name</th>
                         <th id="thscore">Score</th>
-                        <th id=id="thgems">Gems</th>
+                        <th id="thgems">Gems</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -346,6 +361,14 @@ async function mostraScoreboard() {
     tableHTML += 
                 `</tbody>
             </table>
+        </div>
+        <br>
+        <br>
+        <div>
+            Highest score: 
+                ${localStorage.getItem("local_name") || "-"},
+                ${localStorage.getItem("local_highest_score") || "-"},
+                💎 ${localStorage.getItem("local_highest_gemme") || "-"}.
         </div>`;
     
     container.innerHTML = tableHTML;
@@ -374,6 +397,7 @@ document.addEventListener("keydown", (e) => {
 
     if(e.code == "KeyP"){
         pausa = !pausa;
+        audio.playAudio((pausa)? audio.audio_pause_on : audio.audio_pause_off);
         last_frame_timestamp = performance.now();
 
         if(!pausa)

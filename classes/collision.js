@@ -132,14 +132,14 @@ export function risolviCollisione(tile_collisions) {
         response.clear();
 
         // Se c'è intersezione con un tile
-        if (SAT.testPolygonPolygon(player.collision_box.toPolygon(), tile.box.toPolygon ? tile.box.toPolygon() : tile.box, response)) {
+        if(SAT.testPolygonPolygon(player.collision_box.toPolygon(), tile.box.toPolygon ? tile.box.toPolygon() : tile.box, response)) {
 
-            if (tile.type == "lava") {
+            if(tile.type == "lava"){
                 in_lava = true;
                 break;
             }
 
-            if (tile.type == "gem") {
+            if(tile.type == "gem"){
                 tile.sezione.fg_tilemap[tile.livello][tile.index] = 0;
                 player.gemme += (tile.tile >= 12 && tile.tile <= 15) ? 1 : 2;
                 if (tile.tile >= 12 && tile.tile <= 15) {
@@ -152,10 +152,11 @@ export function risolviCollisione(tile_collisions) {
                 if (player.gemme % 100 == 0) {
                     audio.playAudio(audio.audio_excellent);
                 }
+                
                 continue;
             }
 
-            if(tile.type == "diamond") {
+            if(tile.type == "diamond"){
                 const row = Math.floor(tile.index / tile.sezione.map_col);
                 const col = tile.index % tile.sezione.map_col;
 
@@ -214,38 +215,33 @@ export function risolviCollisione(tile_collisions) {
                 }
             }
 
-            if (response.overlapV.y > 1) { //Player in piedi sul tile
+            if (response.overlapV.y > 1 && (player.on_ground || player.on_slope)) { //Player in piedi sul tile
                 player.y -= response.overlapV.y;
                 player.salto = 0;
             }
 
             const p = new SAT.Vector(Math.floor(player.collision_box.pos.x) - (camera_speed-2) + 1, Math.floor(player.collision_box.pos.y) + player.collision_box.h - 1);
 
-            if ((tile.type == "slope" || tile.tile == 25 || tile.tile == 26 || tile.tile == 134 || tile.tile == 136) && player.on_ground) {
+            if (tile.type == "slope" && player.on_ground) {
                 if (player.salto == 0 && !SAT.pointInPolygon(p, tile.box.toPolygon ? tile.box.toPolygon() : tile.box)) {
                     player.y++;
                     continue;
                 }
             }
 
-            if (response.overlapV.y < 0 && response.overlapV.x > 0) { //soffitto inclinato
-                player.y -= response.overlapV.y - 2;
-                player.x -= response.overlapV.x - 2;
+            if(response.overlapV.y < 0 && tile.type != "platform"){   
+                if(response.overlapV.x > 0) //soffitto inclinato
+                    player.x -= response.overlapV.x - 2;
+                
                 player.salto = 2;
-            }
-
-            if (response.overlapV.y < 0) { //soffitto piano
                 player.y -= response.overlapV.y - 2;
-                player.salto = 2;
+                continue;
             }
 
-            if (response.overlapV.x > 0 && tile.type != "poly") { //muro davanti
-                player.rincorsa = 0;
-                player.x -= response.overlapV.x;
-            }
+            if(response.overlapV.x > 0 && tile.type != "poly" && tile.type != "platform"){ //muro davanti
+                if(player.stato == "dash" && player.x < 25)
+                    player.stato = "dash_end";
 
-            if (response.overlapV.x < 0 && tile.type != "poly" /*&& tile.type != "slope"*/) { //muro dietro
-                player.rincorsa = 0;
                 player.x -= response.overlapV.x;
             }
         }

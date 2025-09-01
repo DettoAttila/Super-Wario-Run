@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="fg_tileset" tilewidth="16" tileheight="16" tilecount="256" columns="16">
- <image source="fg.png" width="256" height="256"/>
+<tileset version="1.10" tiledversion="1.10.2" name="fg_tileset" tilewidth="16" tileheight="16" tilecount="640" columns="16">
+ <image source="fg.png" width="256" height="640"/>
  <tile id="7">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="16" height="16"/>
@@ -426,6 +426,36 @@
    <object id="1" x="0.0625" y="16.0625">
     <polygon points="0,0 16,0 16,-11 0,-10.9375"/>
    </object>
+  </objectgroup>
+ </tile>
+ <tile id="166">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="8"/>
+  </objectgroup>
+ </tile>
+ <tile id="167">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="8"/>
+  </objectgroup>
+ </tile>
+ <tile id="168">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="8"/>
+  </objectgroup>
+ </tile>
+ <tile id="182">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="8"/>
+  </objectgroup>
+ </tile>
+ <tile id="183">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="8"/>
+  </objectgroup>
+ </tile>
+ <tile id="184">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="8"/>
   </objectgroup>
  </tile>
 </tileset>

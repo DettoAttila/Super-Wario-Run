@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-  padding-top: 13vh;
+  padding-top: 10vh;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -29,9 +29,7 @@ body {
 #monitor0 {
   position: absolute;
   top: auto;
-  /*top: 13vh;*/
   left: auto;
-  /*left: 10.5vh;*/
   z-index: 1;
   pointer-events: none;
 }
@@ -42,10 +40,6 @@ body {
   left: auto;
   padding-top: 170px;
   margin-left: -8px;
-  /*
-  top: 40vh;
-  left: 122.4vh;
-  */
   z-index: 1;
   pointer-events: none;
 }
@@ -80,7 +74,7 @@ canvas {
   font-size: 0.9rem;
   z-index: 1;
 
-  overflow-y: scroll;
+  overflow: scroll;
 }
 
 .classifica-wrapper > * {
@@ -130,7 +124,7 @@ footer {
   color: sienna;
 }
 
-#thscore {
+#thscore, #thgems {
   text-align: left;
 }
 

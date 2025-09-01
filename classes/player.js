@@ -10,7 +10,6 @@ export const player = {
     salto: 0,
     jump_premuto: false,
     jump_premuto_tempo: 0,
-    dash_timer: 0,
     rincorsa: 0,
     g: 0.8,
     collision_box: null,
@@ -25,7 +24,7 @@ player.collision_box = new SAT.Box(new SAT.Vector(player.x, player.y), player.wi
 
 export function jump(){
     player.salto = -8;
-    player.rincorsa = 2;
+    //player.rincorsa = 2;
     player.y += player.salto;
     player.jump_premuto = true;
     player.jump_premuto_tempo = 0;
