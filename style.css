@@ -68,28 +68,25 @@ canvas {
   position: relative;
   top: 10px;
   left: 8px;
-  
   text-align: center;
   letter-spacing: 1px;
   font-size: 0.9rem;
   z-index: 1;
-
   overflow: scroll;
 }
 
 .classifica-wrapper > * {
-  /*border: 10px red solid;*/
   border-collapse: collapse;
   font-size: 20px;
   color: green;
   -webkit-text-stroke: 3px black;
-  paint-order: stroke fill;
+  paint-order: stroke fill; /* il validatore dice che non esiste la proptietà, ma esiste e serve per la corretta visualizzazione */
   z-index: 1;
 }
 
 #scoreboard {
   -webkit-text-stroke: 6px black;
-  paint-order: stroke fill;
+  paint-order: stroke fill; /* il validatore dice che non esiste la proprietà, ma esiste e serve per la corretta visualizzazione */
   font-size: 50px;
 }
 
@@ -97,8 +94,7 @@ canvas {
   top: 2px;
   position: sticky;
   font-weight: bold;
-  text-transform: uppercase; 
-  /*background-color: ;*/
+  text-transform: uppercase;
 }
 
 .username, .gems, .score {
@@ -124,83 +120,15 @@ footer {
   color: sienna;
 }
 
+#thname {
+  width: 40%;
+}
+
 #thscore, #thgems {
   text-align: left;
 }
 
 img {
-  image-rendering: pixelated;     /* Chrome, Firefox */
-  image-rendering: crisp-edges;   /* Safari, fallback */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
-
-/*
-thead, th {
-  position: sticky;
-}
-  */
-
-/*
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  width: 100%;
-  border-collapse: collapse;
-}
-  */
-
-/*
-.classifica-header th {
-  padding: 15px 10px;
-  border: 10px red solid;
-  text-align: center;
-  font-weight: bold;
-  text-transform: uppercase; 
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-}
-*/
-
-/*
-.classifica-body td {
-  padding: 15px 10px;
-  border: 10px red solid;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-}
-
-.classifica-body {
-  
-}
-*/
-
-/*
-.messagebox {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  padding: 30px;
-  max-width: 400px;
-  min-width: 300px;
-  text-align: center;
-  color: white;
-  animation: messageboxAppear 0.3s ease-out;
-  border: 2px solid rgba(255,255,255,0.2);
-}
-
-.messagebox-input {
-  width: 100%;
-  padding: 12px 15px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  background: rgba(255,255,255,0.9);
-  color: #333;
-  box-sizing: border-box;
-}
-  */

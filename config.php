@@ -1,5 +1,5 @@
 <?php
 define("HOST","localhost");
-define("USER","Attila");
-define("PASS","Giuseppe-2004");
+define("USER","root");
+define("PASS","");
 define("DB","WarioDB");

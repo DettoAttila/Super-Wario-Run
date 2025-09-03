@@ -324,13 +324,13 @@ async function mostraScoreboard() {
     const container = document.getElementById('classifica');
     
     //Loading
-    container.innerHTML = '<div class="loading">Loading...</div>';
+    container.codiceHTML = '<div class="loading">Loading...</div>';
     
     const classifica = await getScoreboard();
     
     // Crea la tabella HTML
-    let tableHTML = `
-        <img src="assets/monitor1.png" id="monitor1">
+    let table = `
+        <img src="assets/monitor1.png" id="monitor1" alt="">
         <h2 id="scoreboard">Scoreboard</h2>
         <div class="classifica-wrapper">
             <table>
@@ -345,12 +345,12 @@ async function mostraScoreboard() {
                 <tbody>
     `;
 
-    const crown_icon = '<img src="assets/crown_icon.png" width="16" height="16">';
+    const crown_icon = '<img src="assets/crown_icon.png" width="16" height="16" alt="">';
     
     classifica.forEach((player, index) => {
         const rowClass = (index < 3)? `podio${index + 1}` : '';
         
-        tableHTML +=`<tr class="${rowClass}">
+        table +=`<tr class="${rowClass}">
                         <td>${(index == 0)? crown_icon : ''} ${player.posizione}</td>
                         <td class="username">${player.username}</td>
                         <td class="score">${player.score.toLocaleString()}</td>
@@ -358,7 +358,7 @@ async function mostraScoreboard() {
                     </tr>`;
     });
     
-    tableHTML += 
+    table += 
                 `</tbody>
             </table>
         </div>
@@ -371,9 +371,9 @@ async function mostraScoreboard() {
                 💎 ${localStorage.getItem("local_highest_gemme") || "-"}.
         </div>`;
     
-    container.innerHTML = tableHTML;
+    container.codiceHTML = table;
 
-    container.innerHTML = container.innerHTML.replace(/💎/g, '<img src="assets/counter_icon.png" width="16" height="16">');
+    container.codiceHTML = container.codiceHTML.replace(/💎/g, '<img src="assets/counter_icon.png" width="16" height="16" alt="">');
 }
 
 document.addEventListener("keydown", (e) => {

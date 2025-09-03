@@ -13,19 +13,19 @@
     
     <div class="container">
       <!-- CANVAS -->
-      <section id="gioco">
+      <div id="gioco">
         <div id="schermata">
-          <img src="assets/monitor0.png" id="monitor0">
+          <img src="assets/monitor0.png" id="monitor0" alt="">
           <canvas id="schermata_gioco"></canvas>
         </div>
         <br>
         Controls: SPACE to jump, &rarr; to dash.
-      </section>
+      </div>
 
       <!-- CLASSIFICA -->
-      <section id="classifica">
+      <div id="classifica">
 
-      </section>
+      </div>
 
       <!-- JS -->
       <script src="./lib/sat-js-master/SAT.js"></script>
