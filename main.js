@@ -324,7 +324,7 @@ async function mostraScoreboard() {
     const container = document.getElementById('classifica');
     
     //Loading
-    container.codiceHTML = '<div class="loading">Loading...</div>';
+    container.innerHTML = '<div class="loading">Loading...</div>';
     
     const classifica = await getScoreboard();
     
@@ -371,9 +371,9 @@ async function mostraScoreboard() {
                 💎 ${localStorage.getItem("local_highest_gemme") || "-"}.
         </div>`;
     
-    container.codiceHTML = table;
+    container.innerHTML = table;
 
-    container.codiceHTML = container.codiceHTML.replace(/💎/g, '<img src="assets/counter_icon.png" width="16" height="16" alt="">');
+    container.innerHTML = container.innerHTML.replace(/💎/g, '<img src="assets/counter_icon.png" width="16" height="16" alt="">');
 }
 
 document.addEventListener("keydown", (e) => {
