@@ -378,11 +378,11 @@ async function mostraScoreboard() {
 
 document.addEventListener("keydown", (e) => {
     switch(e.code) {
-        case 'Space':      // Barra spaziatrice
-        case 'ArrowUp':    // Freccia su
-        case 'ArrowDown':  // Freccia giù
-        case 'ArrowLeft':  // Freccia sinistra
-        case 'ArrowRight': // Freccia destra
+        case 'Space':
+        case 'ArrowUp':
+        case 'ArrowDown':
+        case 'ArrowLeft':
+        case 'ArrowRight':
             e.preventDefault();
             e.stopPropagation();
             break;
