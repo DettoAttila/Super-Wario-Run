@@ -1,8 +1,8 @@
 import * as audio from './classes/audio.js';
 import { checkOnGround, checkOnSlope, creaCollisioni, in_lava, risolviCollisione } from './classes/collision.js';
+import * as draw from './classes/draw.js';
 import { buffer_sezioni, caricaSezione, rimuoviSezione, Sezione, sezioneRandom } from './classes/map.js';
 import { animazione_dashing, animazione_idle, animazione_run, jump, player, punch } from './classes/player.js';
-import * as draw from './classes/draw.js';
 
 //Nel canvas disegniamo la grafica
 export const canvas = document.getElementById("schermata_gioco");
@@ -66,19 +66,19 @@ function update(time){
 
     switch(player.stato){
         case "idle":
-            draw.player_img.src = "assets/wario_idle.png";
+            draw.player_img.src = "assets/img/wario_idle.png";
             animazione_idle();
             break;
         case "run":
-            draw.player_img.src = "assets/wario_running.png";
+            draw.player_img.src = "assets/img/wario_running.png";
             animazione_run();
             break;
         case "dash":
-            draw.player_img.src = "assets/wario_dashing.png";
+            draw.player_img.src = "assets/img/wario_dashing.png";
             animazione_dashing();
             break;
         case "dash_end":
-            draw.player_img.src = "assets/wario_dashing.png";
+            draw.player_img.src = "assets/img/wario_dashing.png";
             animazione_dashing();
             break;
     }
@@ -330,7 +330,7 @@ async function mostraScoreboard() {
     
     // Crea la tabella HTML
     let table = `
-        <img src="assets/monitor1.png" id="monitor1" alt="">
+        <img src="assets/img/monitor1.png" id="monitor1" alt="">
         <h2 id="scoreboard">Scoreboard</h2>
         <div class="classifica-wrapper">
             <table>
@@ -345,7 +345,7 @@ async function mostraScoreboard() {
                 <tbody>
     `;
 
-    const crown_icon = '<img src="assets/crown_icon.png" width="16" height="16" alt="">';
+    const crown_icon = '<img src="assets/img/crown_icon.png" width="16" height="16" alt="">';
     
     classifica.forEach((player, index) => {
         const rowClass = (index < 3)? `podio${index + 1}` : '';
@@ -373,7 +373,7 @@ async function mostraScoreboard() {
     
     container.innerHTML = table;
 
-    container.innerHTML = container.innerHTML.replace(/💎/g, '<img src="assets/counter_icon.png" width="16" height="16" alt="">');
+    container.innerHTML = container.innerHTML.replace(/💎/g, '<img src="assets/img/counter_icon.png" width="16" height="16" alt="">');
 }
 
 document.addEventListener("keydown", (e) => {

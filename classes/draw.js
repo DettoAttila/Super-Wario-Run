@@ -5,40 +5,37 @@ import { player } from './player.js';
 
 //Personaggio
 export const player_img = new Image();
-player_img.src = "assets/wario_idle.png";
+player_img.src = "assets/img/wario_idle.png";
 
 //Foreground
 export const fg_img = new Image();
-fg_img.src = "assets/fg.png";
-fg_img.onload = drawStage;
+fg_img.src = "assets/img/fg.png";
 
 //Background
 export const bg_img = new Image();
-bg_img.src = "assets/bg.png";
-bg_img.onload = drawBG;
+bg_img.src = "assets/img/bg.png";
 
 //GUI
 export const num_img = new Image();
-num_img.src = "assets/num.png";
-num_img.onload = drawGUI;
+num_img.src = "assets/img/num.png";
 
 const counter_icon = new Image();
-counter_icon.src = "assets/counter_icon.png";
+counter_icon.src = "assets/img/counter_icon.png";
 
 //Schermate
 export const title_img = new Image();
-title_img.src = "assets/title.png";
+title_img.src = "assets/img/title.png";
 
 export const gameover_img = new Image();
-gameover_img.src = "assets/gameover.png";
+gameover_img.src = "assets/img/gameover.png";
 
 //Collezionabili
 export const diamond_img = new Image();
-diamond_img.src = "assets/diamond.png";
+diamond_img.src = "assets/img/diamond.png";
 
 //Particelle
 export const rocks_img = new Image();
-rocks_img.src = "assets/rocks.png";
+rocks_img.src = "assets/img/rocks.png";
 
 //Frame per animazioni
 let frame_counter = 0;
@@ -79,15 +76,6 @@ export function drawPlayer() {
         );
     }
     
-    ctx.restore();
-}
-
-//DEBUG
-export function drawSATBox(ctx, box, color){
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(box.pos.x, box.pos.y, box.w, box.h);
     ctx.restore();
 }
 
@@ -235,8 +223,6 @@ export function drawStage(lvl = 1){
     const inizio_row_visibile = 0;
     const fine_row_visibile = Math.ceil(canvas.height / tile_size);
 
-    //const diamonds_tile = [139, 140, 154, 155, 156]; //a eccezione del 138, gli altri non vanno disegnati
-
     //animazione gemme
     if(lvl != 0){
         frame_counter++;
@@ -354,5 +340,15 @@ export function drawVector(ctx, v, color = "red") {
         ctx.arc(p.x, p.y, 1, 0, Math.PI * 2);
         ctx.fill();
     }
+}
+*/
+
+/*
+export function drawSATBox(ctx, box, color){
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(box.pos.x, box.pos.y, box.w, box.h);
+    ctx.restore();
 }
 */

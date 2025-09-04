@@ -15,7 +15,7 @@
       <!-- CANVAS -->
       <div id="gioco">
         <div id="schermata">
-          <img src="assets/monitor0.png" id="monitor0" alt="">
+          <img src="assets/img/monitor0.png" id="monitor0" alt="">
           <canvas id="schermata_gioco"></canvas>
         </div>
         <br>
@@ -32,17 +32,19 @@
       <script type="module" src="main.js"></script>
     </div>
 
+    <a class="manuale" href="manuale.html">Clicca qui per leggere il manuale</a>
+
     <footer>
       This product was not made or endorsed by Nintendo. All rights reserved.<br>
       <br>
-      Credits: <br>
-      Graphics: The Spriters Resource, A. J. Nitro, TGS13, cheat-master30, SMWCentral, Falconpunch, DarkYoshi, DIRGE, cl.exe <br>
-      Sound: The Sounds Resource, Weario, specularbark45, King_Harkinian <br>
-      Font: heaven castro <br>
-      Libraries: jriecken <br>
+      <b><u>Credits</u></b>: <br>
+      <b>Graphics</b>: The Spriters Resource, A. J. Nitro, TGS13, cheat-master30, SMWCentral, Falconpunch, DarkYoshi, DIRGE, cl.exe <br>
+      <b>Sound</b>: The Sounds Resource, Weario, specularbark45, King_Harkinian <br>
+      <b>Font</b>: heaven castro <br>
+      <b>Libraries</b>: jriecken <br>
       <!--
       <br>
-      Special Thanks: -->
+      <b><u>Special Thanks</u></b>: -->
     </footer>
   </body>
 
