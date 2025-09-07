@@ -103,7 +103,7 @@ canvas {
 }
 
 .classifica_wrapper:hover {
-  overflow-y: overlay;
+  overflow-y: auto;
 }
 
 #local_highest {
@@ -112,7 +112,9 @@ canvas {
 
 /*
 Il contorno dei testi fatto con -webkit-text-stroke e paint-order
-è stato concordato in data 4 settembre 2025
+è stato concordato in data 4 settembre 2025.
+
+Nota: nel validatore dà errore la proprietà paint-order, dicendo che non esiste, anche se funziona.
 */
 
 .classifica_wrapper > * {
