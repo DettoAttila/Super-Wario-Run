@@ -146,7 +146,7 @@ Nota: nel validatore dà errore la proprietà paint-order, dicendo che non esist
 footer {
   padding-top: 80px;
   padding-bottom: 80px;
-  font-size: small;
+  font-size: 13px;
   text-align: center;
 }
 
