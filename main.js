@@ -35,7 +35,7 @@ export let fg_tilemap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 export const tile_size = 16;
 export const tile_col = 16;
 
-let margine_caricamento = tile_size*5; //grullo
+let margine_caricamento = tile_size*5;
 
 export let map_col = 15;
 export let map_row = 10;
@@ -66,19 +66,19 @@ function update(time){
 
     switch(player.stato){
         case "idle":
-            draw.player_img.src = "assets/img/wario_idle.png";
+            if(draw.player_img.src != "assets/img/wario_idle.png") draw.player_img.src = "assets/img/wario_idle.png";
             animazione_idle();
             break;
         case "run":
-            draw.player_img.src = "assets/img/wario_running.png";
+            if(draw.player_img.src != "assets/img/wario_running.png") draw.player_img.src = "assets/img/wario_running.png";;
             animazione_run();
             break;
         case "dash":
-            draw.player_img.src = "assets/img/wario_dashing.png";
+            if(draw.player_img.src != "assets/img/wario_dashing.png") draw.player_img.src = "assets/img/wario_dashing.png";
             animazione_dashing();
             break;
         case "dash_end":
-            draw.player_img.src = "assets/img/wario_dashing.png";
+            if(draw.player_img.src != "assets/img/wario_dashing.png") draw.player_img.src = "assets/img/wario_dashing.png";
             animazione_dashing();
             break;
     }
@@ -114,8 +114,10 @@ function update(time){
     if(player.stato == "dash" && player.x < 50){
         player.x += player.rincorsa;   
 
-        if(player.x >= 50)
+        if(player.x >= 50){
             player.stato = "dash_end";
+            player.rincorsa = 0;
+        }
     }
 
     //se finisce un po' troppo indietro dopo una collisione
@@ -138,7 +140,7 @@ function update(time){
         player.y += player.salto;
     }
 
-    player.collision_box.pos.x = player.x + 10; //+5
+    player.collision_box.pos.x = player.x + 10;
     player.collision_box.pos.y = player.y + 9;
     
     player.on_ground = checkOnGround(tile_collisions);
@@ -238,26 +240,22 @@ async function salvaPunteggio(in_classifica, is_high_score){
                         gems: player.gemme
                     })
                 });
-                
-                if(!response.ok)
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                
+                                
                 const result = await response.json();
                 
                 if(!result.success){
                     console.error("Error:", result.error);
                     alert("Error saving score.");
                 }
-                
-            } catch (error) {
-                console.error("Error saving score:", error);
+            } catch(error) {
+                console.error("Error:", error);
                 alert("Error saving score.");
             }
         }
     }
 }
 
-function checkHighestScore() {
+function checkHighestScore(){
     const local_highest_score = localStorage.getItem("local_highest_score") || 0;
     const local_highest_gemme = localStorage.getItem("local_highest_gemme") || 0;
 
@@ -267,24 +265,20 @@ function checkHighestScore() {
     return false;
 }
 
-async function checkClassifica() {
+async function checkClassifica(){
     try {
         const response = await fetch("check_score.php", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({punteggio: player.punteggio, gems: player.gemme})
         });
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
         const risultato = await response.json();
         
-        if (risultato.success) {
-            return risultato.inClassifica; // o restituisci tutto l'oggetto risultato
+        if(risultato.success){
+            return risultato.in_classifica;
         } else {
-            console.error("Errore dal server:", risultato.error);
+            console.error("Errore:", risultato.error);
             return false;
         }
 
@@ -298,29 +292,25 @@ async function getScoreboard(){
     try {
         const response = await fetch("print_classifica.php", {
             method: "GET",
-            headers: { "Content-Type": "application/json" }
+            headers: {"Content-Type": "application/json"}
         });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
         
         const data = await response.json();
         
-        if (data.success) {
+        if(data.success){
             return data.classifica;
         } else {
-            console.error("Errore dal server:", data.error);
+            console.error("Errore:", data.error);
             return [];
         }
         
-    } catch (error) {
-        console.error("Errore nel recupero della classifica:", error);
+    } catch(error) {
+        console.error("Errore in getScoreboard:", error);
         return [];
     }
 }
 
-async function mostraScoreboard() {
+async function mostraScoreboard(){
     const container = document.getElementById('classifica');
     
     //Loading
@@ -328,11 +318,10 @@ async function mostraScoreboard() {
     
     const classifica = await getScoreboard();
     
-    // Crea la tabella HTML
     let table = `
         <img src="assets/img/monitor1.png" id="monitor1" alt="">
         <h2 id="scoreboard">Scoreboard</h2>
-        <div class="classifica-wrapper">
+        <div class="classifica_wrapper">
             <table>
                 <thead>
                     <tr>
@@ -348,23 +337,22 @@ async function mostraScoreboard() {
     const crown_icon = '<img src="assets/img/crown_icon.png" width="16" height="16" alt="">';
     
     classifica.forEach((player, index) => {
-        const rowClass = (index < 3)? `podio${index + 1}` : '';
+        const id = (index < 3)? `podio${index + 1}` : '';
         
-        table +=`<tr class="${rowClass}">
-                        <td>${(index == 0)? crown_icon : ''} ${player.posizione}</td>
-                        <td class="username">${player.username}</td>
-                        <td class="score">${player.score.toLocaleString()}</td>
-                        <td class="gems">💎 ${player.gems}</td>
-                    </tr>`;
+        table +=`<tr id="${id}">
+                    <td>${(index == 0)? crown_icon : ''} ${player.posizione}</td>
+                    <td class="username">${player.username}</td>
+                    <td class="score">${player.score.toLocaleString()}</td>
+                    <td class="gems">💎 ${player.gems}</td>
+                </tr>`;
     });
     
-    table += 
-                `</tbody>
+    table += `</tbody>
             </table>
         </div>
         <br>
         <br>
-        <div>
+        <div id="local_highest">
             Highest score: 
                 ${localStorage.getItem("local_name") || "-"},
                 ${localStorage.getItem("local_highest_score") || "-"},
@@ -377,7 +365,7 @@ async function mostraScoreboard() {
 }
 
 document.addEventListener("keydown", (e) => {
-    switch(e.code) {
+    switch(e.code){
         case 'Space':
         case 'ArrowUp':
         case 'ArrowDown':
@@ -395,7 +383,7 @@ document.addEventListener("keydown", (e) => {
             reset();
     }
 
-    if(e.code == "KeyP"){
+    if(e.code == "KeyP" && stato_gioco == "play"){
         pausa = !pausa;
         audio.playAudio((pausa)? audio.audio_pause_on : audio.audio_pause_off);
         last_frame_timestamp = performance.now();

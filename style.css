@@ -3,6 +3,32 @@
   src: url('assets/font/Warioland4chmc-VApe.ttf') format('truetype');
 }
 
+/*
+Il codice sotto serve per garantire compatibilità con i browser più utilizzati.
+*/
+
+/*Per i browser Chromium based*/
+@supports (-webkit-appearance: none) {
+  .classifica_wrapper, .loading {
+    top: 55px;
+  }
+
+  #local_highest {
+    padding-top: 55px;
+  }
+}
+
+/*Mozilla*/
+@supports (-moz-appearance: none) {
+  .classifica_wrapper, .loading {
+    top: 10px;
+  }
+
+  #local_highest {
+    padding-top: 10px;
+  }
+}
+
 .titolo {
   display: block;
   text-align: center;
@@ -30,7 +56,7 @@ body {
   position: absolute;
   top: auto;
   left: auto;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -40,11 +66,12 @@ body {
   left: auto;
   padding-top: 170px;
   margin-left: -8px;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
 }
 
 #classifica {
+  position: relative;
   padding-left: 4%;
   padding-bottom: 150px;
 }
@@ -55,42 +82,55 @@ canvas {
   padding-top: 8px;
   background: transparent;
   image-rendering: pixelated;
-  z-index: 0;
+  z-index: 1;
   width: 960px;
   height: 640px;
 }
 
-.classifica-wrapper, .loading {
+.classifica_wrapper, .loading {
   width: 550px;
-  height: 303px; /*324px*/
+  height: 303px;
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 10px;
   left: 8px;
   text-align: center;
   letter-spacing: 1px;
   font-size: 0.9rem;
   z-index: 1;
-  overflow: scroll;
+  overflow-y: hidden;
+  box-sizing: border-box;
 }
 
-.classifica-wrapper > * {
+.classifica_wrapper:hover {
+  overflow-y: overlay;
+}
+
+#local_highest {
+  position: absolute;
+}
+
+/*
+Il contorno dei testi fatto con -webkit-text-stroke e paint-order
+è stato concordato in data 4 settembre 2025
+*/
+
+.classifica_wrapper > * {
   border-collapse: collapse;
   font-size: 20px;
   color: green;
   -webkit-text-stroke: 3px black;
-  paint-order: stroke fill; /* il validatore dice che non esiste la proptietà, ma esiste e serve per la corretta visualizzazione */
-  z-index: 1;
+  paint-order: stroke fill;
 }
 
 #scoreboard {
   -webkit-text-stroke: 6px black;
-  paint-order: stroke fill; /* il validatore dice che non esiste la proprietà, ma esiste e serve per la corretta visualizzazione */
+  paint-order: stroke fill;
   font-size: 50px;
 }
 
-.classifica-wrapper thead {
+
+.classifica_wrapper thead {
   top: 2px;
   position: sticky;
   font-weight: bold;
@@ -104,19 +144,19 @@ canvas {
 footer {
   padding-top: 80px;
   padding-bottom: 80px;
-  font-size: x-small;
+  font-size: small;
   text-align: center;
 }
 
-.podio1 {
+#podio1 {
   color: yellow;
 }
 
-.podio2 {
+#podio2 {
   color: silver;
 }
 
-.podio3 {
+#podio3 {
   color: sienna;
 }
 

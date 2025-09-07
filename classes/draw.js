@@ -29,10 +29,6 @@ title_img.src = "assets/img/title.png";
 export const gameover_img = new Image();
 gameover_img.src = "assets/img/gameover.png";
 
-//Collezionabili
-export const diamond_img = new Image();
-diamond_img.src = "assets/img/diamond.png";
-
 //Particelle
 export const rocks_img = new Image();
 rocks_img.src = "assets/img/rocks.png";
@@ -47,7 +43,7 @@ let frame_diamond = 0;
 ///////////////////////////////////////////////////////////////////////////////////////
 
 //FUNZIONI
-export function drawPlayer() {
+export function drawPlayer(){
     ctx.save();
     //disegna il player
     if(player.stato == "run" || player.stato == "idle"){
@@ -62,7 +58,7 @@ export function drawPlayer() {
             player.width,
             player.height 
         );
-    } else if(player.stato == "dash" || player.stato == "dash_end") {
+    } else if(player.stato == "dash" || player.stato == "dash_end"){
         ctx.drawImage(
             player_img,
             39 * player.frame_x,
@@ -79,7 +75,7 @@ export function drawPlayer() {
     ctx.restore();
 }
 
-export function drawTileCollisionDebug() {
+export function drawTileCollisionDebug(){
     const tileCollisions = creaCollisioni();
 
     ctx.save();
@@ -87,21 +83,21 @@ export function drawTileCollisionDebug() {
     ctx.lineWidth = 1;
     ctx.fillStyle = 'rgba(255, 255, 0, 0.2)';
 
-    for (let tile of tileCollisions) {
-        if (tile.type == "rect" || tile.type == "gem") {
+    for(let tile of tileCollisions){
+        if(tile.type == "rect" || tile.type == "gem"){
             const x = tile.box.pos.x;
             const y = tile.box.pos.y;
             ctx.strokeRect(x, y, tile.box.w, tile.box.h);
             ctx.fillRect(x, y, tile.box.w, tile.box.h);
         }
 
-        if (tile.type == "poly"){
+        if(tile.type == "poly"){
             const poly = tile.box;
             const points = poly.calcPoints;
 
             ctx.beginPath();
             ctx.moveTo(poly.pos.x + points[0].x, poly.pos.y + points[0].y);
-            for (let i = 1; i < points.length; i++) {
+            for(let i = 1; i < points.length; i++){
                 ctx.lineTo(poly.pos.x + points[i].x, poly.pos.y + points[i].y);
             }
             ctx.closePath();
@@ -113,13 +109,13 @@ export function drawTileCollisionDebug() {
     ctx.restore();
 }
 
-export function drawGUI() {
+export function drawGUI(){
     ctx.save();
     
     const str_gemme = player.gemme.toString().padStart(6, '0');
 
     
-    for (let i = 0; i < 6; i++) {
+    for(let i = 0; i < 6; i++){
         const cifra = parseInt(str_gemme[i]);
         const source_x = 8 * cifra;
         
@@ -144,7 +140,7 @@ export function drawGUI() {
 
     const str_punteggio = player.punteggio.toString().padStart(6, '0');
     
-    for (let i = 0; i < 6; i++) {
+    for(let i = 0; i < 6; i++){
         const cifra = parseInt(str_punteggio[i]);
         const source_x = 8 * cifra;
         
@@ -226,7 +222,7 @@ export function drawStage(lvl = 1){
     //animazione gemme
     if(lvl != 0){
         frame_counter++;
-        if(frame_counter >= 7) { //delay
+        if(frame_counter >= 7){ //delay
             frame_counter = 0;
             frame_gem = (frame_gem + 1) % 4; //4 sono i frame totali delle gemme
             frame_lava = (frame_lava + 1) % 6;
@@ -240,16 +236,16 @@ export function drawStage(lvl = 1){
         const {fg_tilemap, map_col, map_row} = sezione;
         let index_livello = 0;
         for(let livello of sezione.fg_tilemap){
-            if(lvl == 1 && index_livello == 0) {
+            if(lvl == 1 && index_livello == 0){
                 index_livello++;
                 continue;
             }
 
-            for (let i = inizio_row_visibile; i < fine_row_visibile; i++) {
-                if (i >= map_row) continue;
+            for(let i = inizio_row_visibile; i < fine_row_visibile; i++){
+                if(i >= map_row) continue;
 
-                for (let j = inizio_col_visibile; j < fine_col_visibile; j++) {
-                    if (j - col_offset < 0 || j - col_offset >= map_col) continue;
+                for(let j = inizio_col_visibile; j < fine_col_visibile; j++){
+                    if(j - col_offset < 0 || j - col_offset >= map_col) continue;
 
                     const index = i * map_col + (j - col_offset);
                     let tile = livello[index];
@@ -314,6 +310,7 @@ export function drawStage(lvl = 1){
 
             index_livello++;
         }
+
         col_offset += map_col;
 
     }
@@ -330,25 +327,3 @@ export function drawBG(){
     ctx.fillRect(0, 0, canvas.width + bg_img.width, canvas.height);
     ctx.restore();
 }
-
-//DEBUG
-/*
-export function drawVector(ctx, v, color = "red") {
-    for(let p of v){
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
-*/
-
-/*
-export function drawSATBox(ctx, box, color){
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(box.pos.x, box.pos.y, box.w, box.h);
-    ctx.restore();
-}
-*/

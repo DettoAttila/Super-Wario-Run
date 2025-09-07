@@ -5,19 +5,18 @@ header('Content-Type: application/json');
 try {
     $connect = mysqli_connect(HOST, USER, PASS, DB);
     
-    // Errore di connessione
     if(mysqli_connect_errno()){
         echo json_encode([
             'success' => false,
-            'error' => 'Errore connessione: ' . mysqli_connect_error()
+            'error' => 'Errore connessione: '.mysqli_connect_error()
         ]);
         exit;
     }
     
-    // Query per ottenere la top 50 (o cambia il numero come preferisci)
+    //QUERY TOP 50
     $query = "SELECT * 
               FROM Scoreboard 
-              ORDER BY Score DESC, Gems DESC 
+              ORDER BY Score DESC, Gems DESC
               LIMIT 50";
     
     $result = mysqli_query($connect, $query);
@@ -25,7 +24,7 @@ try {
     if(!$result) {
         echo json_encode([
             'success' => false,
-            'error' => 'Errore nella query: ' . mysqli_error($connect)
+            'error' => 'Errore query'
         ]);
         exit;
     }
@@ -36,10 +35,11 @@ try {
     while($row = mysqli_fetch_assoc($result)) {
         $classifica[] = [
             'posizione' => $posizione,
-            'username' => htmlspecialchars($row['Username']), // Sicurezza contro XSS
+            'username' => htmlspecialchars($row['Username']),
             'score' => (int)$row['Score'],
             'gems' => (int)$row['Gems']
         ];
+
         $posizione++;
     }
     
@@ -49,13 +49,11 @@ try {
         'total' => count($classifica)
     ]);
     
-} catch (Exception $e) {
+} catch(Exception $e) {
     echo json_encode([
         'success' => false,
-        'error' => 'Errore server: ' . $e->getMessage()
+        'error' => 'Errore server: '.$e->getMessage()
     ]);
 } finally {
-    if(isset($connect)) {
-        mysqli_close($connect);
-    }
+    mysqli_close($connect);
 }

@@ -5,7 +5,7 @@ import { buffer_sezioni, col_offset_global, collision_data } from "./map.js";
 import { player } from "./player.js";
 
 
-export function creaCollisioni() {
+export function creaCollisioni(){
     let tile_collisions = [];
 
     const HFLIP_FLAG = 0x80000000;
@@ -19,16 +19,16 @@ export function creaCollisioni() {
 
     let col_offset = col_offset_global;
 
-    for (const sezione of buffer_sezioni) {
+    for (const sezione of buffer_sezioni){
         const { fg_tilemap, map_col, map_row } = sezione;
 
-        for (let livello of sezione.fg_tilemap) {
+        for (let livello of sezione.fg_tilemap){
 
             for (let i = inizio_row_visibile; i < fine_row_visibile; i++) {
-                if (i >= map_row) continue;
+                if(i >= map_row) continue;
 
                 for (let j = inizio_col_visibile; j < fine_col_visibile; j++) {
-                    if (j - col_offset < 0 || j - col_offset >= map_col) continue;
+                    if(j - col_offset < 0 || j - col_offset >= map_col) continue;
 
                     const index = i * map_col + (j - col_offset);
                     const tile = livello[index];
@@ -37,17 +37,17 @@ export function creaCollisioni() {
                     const hflip = tile & HFLIP_FLAG;
                     const vflip = tile & VFLIP_FLAG;
 
-                    if (tile == 0) continue;
+                    if(tile == 0) continue;
 
                     const tile_x = Math.floor(j * tile_size - camera_x);
                     const tile_y = i * tile_size;
 
-                    if (collision_data[tile_id]) {
+                    if(collision_data[tile_id]) {
                         const collisionInfo = collision_data[tile_id][0];
 
                         let tilebox;
 
-                        if (collisionInfo.type != "poly" && collisionInfo.type != "slope") {
+                        if(collisionInfo.type != "poly" && collisionInfo.type != "slope") {
                             tilebox = new SAT.Box(
                                 new SAT.Vector(tile_x + collisionInfo.x, tile_y + collisionInfo.y),
                                 collisionInfo.width,
@@ -58,8 +58,8 @@ export function creaCollisioni() {
                                 let px = point[0];
                                 let py = point[1];
 
-                                if (hflip) px = tile_size - px;
-                                if (vflip) py = tile_size - py;
+                                if(hflip) px = tile_size - px;
+                                if(vflip) py = tile_size - py;
 
                                 return new SAT.Vector(px, py);
                             });
@@ -91,14 +91,14 @@ export function creaCollisioni() {
     return tile_collisions;
 }
 
-export function checkOnGround(tile_collisions) {
+export function checkOnGround(tile_collisions){
     let response = new SAT.Response();
 
-    for (let tile of tile_collisions) {
+    for(let tile of tile_collisions){
         response.clear();
 
-        if (SAT.testPolygonPolygon(player.collision_box.toPolygon(), tile.box.toPolygon ? tile.box.toPolygon() : tile.box, response)) {
-            if (response.overlapV.y > 0 /*|| response.overlapV.x < camera_speed*/) { //player in piedi sul tile
+        if(SAT.testPolygonPolygon(player.collision_box.toPolygon(), tile.box.toPolygon ? tile.box.toPolygon() : tile.box, response)) {
+            if(response.overlapV.y > 0 /*|| response.overlapV.x < camera_speed*/) { //player in piedi sul tile
                 return true;
             }
         }
@@ -107,15 +107,15 @@ export function checkOnGround(tile_collisions) {
     return false;
 }
 
-export function checkOnSlope(tile_collisions) {
+export function checkOnSlope(tile_collisions){
     let response = new SAT.Response();
 
     const p = new SAT.Vector(player.collision_box.pos.x - 2, player.collision_box.pos.y + player.height - 1); //+1 +1
 
-    for (let tile of tile_collisions) {
+    for(let tile of tile_collisions){
         response.clear();
 
-        if (SAT.pointInPolygon(p, tile.box.toPolygon ? tile.box.toPolygon() : tile.box, response))
+        if(SAT.pointInPolygon(p, tile.box.toPolygon ? tile.box.toPolygon() : tile.box, response))
             return true;
     }
 
@@ -125,10 +125,10 @@ export function checkOnSlope(tile_collisions) {
 
 export let in_lava = false;
 
-export function risolviCollisione(tile_collisions) {
+export function risolviCollisione(tile_collisions){
     let response = new SAT.Response();
 
-    for (let tile of tile_collisions) {
+    for(let tile of tile_collisions){
         response.clear();
 
         // Se c'è intersezione con un tile
@@ -142,47 +142,41 @@ export function risolviCollisione(tile_collisions) {
             if(tile.type == "gem"){
                 tile.sezione.fg_tilemap[tile.livello][tile.index] = 0;
                 player.gemme += (tile.tile >= 12 && tile.tile <= 15) ? 1 : 2;
-                if (tile.tile >= 12 && tile.tile <= 15) {
+                if(tile.tile >= 12 && tile.tile <= 15){
                     audio.playAudio(audio.audio_blue_gem);
                     player.punteggio += 15;
                 } else {
                     audio.playAudio(audio.audio_red_gem);
                     player.punteggio += 30;
                 }
-                if (player.gemme % 100 == 0) {
+                if(player.gemme % 100 == 0){
                     audio.playAudio(audio.audio_excellent);
                 }
                 
-                continue;
+                break;
             }
 
             if(tile.type == "diamond"){
                 const row = Math.floor(tile.index / tile.sezione.map_col);
                 const col = tile.index % tile.sezione.map_col;
 
-                //Mappa ogni tile alla sua posizione relativa nel diamante 3x2
                 const diamond = {
-                    138: { row_offset: 0, col_offset: 0 }, //top-left
-                    139: { row_offset: 0, col_offset: -1 }, //top-center
-                    140: { row_offset: 0, col_offset: -2 }, //top-right
-                    154: { row_offset: -1, col_offset: 0 }, //bottom-left
-                    155: { row_offset: -1, col_offset: -1 }, //bottom-center
-                    156: { row_offset: -1, col_offset: -2 } //bottom-right
+                    138: {row_offset: 0, col_offset: 0}, //top-left
+                    139: {row_offset: 0, col_offset: -1}, //top-center
+                    140: {row_offset: 0, col_offset: -2}, //top-right
+                    154: {row_offset: -1, col_offset: 0}, //bottom-left
+                    155: {row_offset: -1, col_offset: -1}, //bottom-center
+                    156: {row_offset: -1, col_offset: -2} //bottom-right
                 };
 
-                //console.log(tile.tile);
                 const offset = diamond[tile.tile];
                 const top_left_row = row + offset.row_offset; //row
                 const top_left_col = col + offset.col_offset; //col
 
 
-                // Verifica bordi e cancella tutti i 6 tile
-                if (top_left_row >= 0 && top_left_row + 1 < tile.sezione.map_row &&
-                    top_left_col >= 0 && top_left_col + 2 < tile.sezione.map_col) {
-
-                    // Cancella il diamante 3x2
-                    for (let i = 0; i < 2; i++) {
-                        for (let j = 0; j < 3; j++) {
+                if(top_left_row >= 0 && top_left_row + 1 < tile.sezione.map_row && top_left_col >= 0 && top_left_col + 2 < tile.sezione.map_col) {
+                    for(let i = 0; i < 2; i++){
+                        for(let j = 0; j < 3; j++){
                             const index = (top_left_row + i) * tile.sezione.map_col + (top_left_col + j);
                             tile.sezione.fg_tilemap[tile.livello][index] = 0;
                         }
@@ -192,17 +186,17 @@ export function risolviCollisione(tile_collisions) {
                     audio.playAudio(audio.audio_diamond);
                     player.punteggio += 300;
 
-                    if (player.gemme % 100 == 0)
+                    if(player.gemme % 100 == 0)
                         audio.playAudio(audio.audio_excellent);
                 }
 
-                continue;
+                break;
             }
 
             let blocco0 = [73, 89];
             let blocco1 = [75, 91];
-            if ((blocco0.includes(tile.tile) || blocco1.includes(tile.tile))) {
-                if (player.stato == "dash") {
+            if((blocco0.includes(tile.tile) || blocco1.includes(tile.tile))) {
+                if(player.stato == "dash") {
                     tile.sezione.fg_tilemap[tile.livello][tile.index] = 0;
                     tile.sezione.fg_tilemap[tile.livello][tile.index + 1] = 0;
                     const offset_colonne = (tile.tile == 89 || tile.tile == 91) ? -tile.sezione.map_col : tile.sezione.map_col;
@@ -215,15 +209,15 @@ export function risolviCollisione(tile_collisions) {
                 }
             }
 
-            if (response.overlapV.y > 1 && (player.on_ground || player.on_slope)) { //Player in piedi sul tile
+            if(response.overlapV.y > 1 && (player.on_ground || player.on_slope)) { //player in piedi sul tile
                 player.y -= response.overlapV.y;
                 player.salto = 0;
             }
 
             const p = new SAT.Vector(Math.floor(player.collision_box.pos.x) - (camera_speed-2) + 1, Math.floor(player.collision_box.pos.y) + player.collision_box.h - 1);
 
-            if (tile.type == "slope" && player.on_ground) {
-                if (player.salto == 0 && !SAT.pointInPolygon(p, tile.box.toPolygon ? tile.box.toPolygon() : tile.box)) {
+            if(tile.type == "slope" && (player.on_ground)) {
+                if(player.salto == 0 && !SAT.pointInPolygon(p, tile.box.toPolygon ? tile.box.toPolygon() : tile.box)) {
                     player.y++;
                     continue;
                 }
